@@ -1,0 +1,946 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification System & Cloud Functions Architecture for Construction Freelancer Marketplace</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+        .gradient-header {
+            background: linear-gradient(90deg, #2a4365 0%, #3182ce 100%);
+        }
+        .architecture-diagram {
+            max-width: 100%;
+            height: auto;
+        }
+        .icon-box {
+            min-height: 60px;
+        }
+        .function-card {
+            border-left: 4px solid #3182ce;
+        }
+        .notification-card {
+            border-left: 4px solid #4c51bf;
+        }
+        .trigger-card {
+            border-left: 4px solid #38a169;
+        }
+        .payment-card {
+            border-left: 4px solid #e53e3e;
+        }
+        .geolocation-card {
+            border-left: 4px solid #dd6b20;
+        }
+        .admin-card {
+            border-left: 4px solid #805ad5;
+        }
+        .trigger-flow {
+            position: relative;
+        }
+        .trigger-flow::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 100%;
+            width: 2px;
+            height: 20px;
+            background-color: #cbd5e0;
+        }
+        .section-divider {
+            height: 4px;
+            background: linear-gradient(90deg, #3182ce 0%, transparent 100%);
+            width: 100%;
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <header class="gradient-header text-white py-10 px-6 mb-8">
+        <div class="container mx-auto">
+            <h1 class="text-4xl font-bold mb-4">Notification System & Cloud Functions Architecture</h1>
+            <h2 class="text-2xl mb-6">Construction Freelancer Marketplace App - Manchester, UK</h2>
+            <div class="flex items-center space-x-4 text-sm">
+                <div class="flex items-center"><i class="fas fa-map-marker-alt mr-2"></i> Manchester Focus</div>
+                <div class="flex items-center"><i class="fas fa-bell mr-2"></i> Firebase Cloud Messaging</div>
+                <div class="flex items-center"><i class="fas fa-cloud mr-2"></i> Firebase Cloud Functions</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 pb-16">
+        <!-- Introduction -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-6">Overview</h2>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <p class="mb-4">This document outlines the comprehensive notification system and Cloud Functions architecture for the Construction Freelancer Marketplace application serving the Manchester, UK region. The system leverages Firebase Cloud Messaging (FCM) for real-time notifications and Firebase Cloud Functions for serverless backend operations.</p>
+                <p>The architecture is designed to facilitate timely communication between construction freelancers and clients, handle secure payment processing, manage location-based services, and automate administrative tasks - all tailored to the unique requirements of Manchester's construction industry.</p>
+            </div>
+        </section>
+
+        <!-- System Architecture Overview -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-6">System Architecture Overview</h2>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4">High-Level Architecture</h3>
+                    <div class="bg-blue-50 p-6 rounded-lg mb-6">
+                        <div class="architecture-diagram text-center">
+                            <svg viewBox="0 0 800 400" class="w-full">
+                                <!-- Client App -->
+                                <rect x="50" y="150" width="150" height="100" rx="10" fill="#3182ce" />
+                                <text x="125" y="200" text-anchor="middle" fill="white" font-weight="bold">Mobile App</text>
+                                
+                                <!-- Firebase Services -->
+                                <rect x="325" y="50" width="150" height="300" rx="10" fill="#4c51bf" />
+                                <text x="400" y="80" text-anchor="middle" fill="white" font-weight="bold">Firebase Services</text>
+                                <rect x="350" y="100" width="100" height="40" rx="5" fill="white" />
+                                <text x="400" y="125" text-anchor="middle" fill="#4c51bf" font-size="12">Authentication</text>
+                                <rect x="350" y="150" width="100" height="40" rx="5" fill="white" />
+                                <text x="400" y="175" text-anchor="middle" fill="#4c51bf" font-size="12">Firestore</text>
+                                <rect x="350" y="200" width="100" height="40" rx="5" fill="white" />
+                                <text x="400" y="225" text-anchor="middle" fill="#4c51bf" font-size="12">Cloud Functions</text>
+                                <rect x="350" y="250" width="100" height="40" rx="5" fill="white" />
+                                <text x="400" y="275" text-anchor="middle" fill="#4c51bf" font-size="12">Cloud Messaging</text>
+                                <rect x="350" y="300" width="100" height="40" rx="5" fill="white" />
+                                <text x="400" y="325" text-anchor="middle" fill="#4c51bf" font-size="12">Storage</text>
+                                
+                                <!-- Third-Party Services -->
+                                <rect x="600" y="100" width="150" height="60" rx="10" fill="#38a169" />
+                                <text x="675" y="135" text-anchor="middle" fill="white" font-weight="bold">Payment Gateway</text>
+                                <rect x="600" y="170" width="150" height="60" rx="10" fill="#dd6b20" />
+                                <text x="675" y="205" text-anchor="middle" fill="white" font-weight="bold">Maps API</text>
+                                <rect x="600" y="240" width="150" height="60" rx="10" fill="#805ad5" />
+                                <text x="675" y="275" text-anchor="middle" fill="white" font-weight="bold">Analytics</text>
+                                
+                                <!-- Connection Lines -->
+                                <line x1="200" y1="200" x2="325" y2="200" stroke="#718096" stroke-width="3" />
+                                <line x1="475" y1="130" x2="600" y2="130" stroke="#718096" stroke-width="3" />
+                                <line x1="475" y1="200" x2="600" y2="200" stroke="#718096" stroke-width="3" />
+                                <line x1="475" y1="270" x2="600" y2="270" stroke="#718096" stroke-width="3" />
+                            </svg>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2 text-center">Figure 1: High-level system architecture showing the relationship between app, Firebase services, and third-party integrations</p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-semibold mb-2">Key Components</h4>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Mobile Client Applications (iOS & Android)</li>
+                            <li>Firebase Authentication</li>
+                            <li>Firestore Database</li>
+                            <li>Firebase Cloud Functions</li>
+                            <li>Firebase Cloud Messaging</li>
+                            <li>Firebase Storage</li>
+                            <li>Payment Gateway Integration</li>
+                            <li>Maps API Integration</li>
+                        </ul>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-semibold mb-2">Key Design Principles</h4>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Event-driven architecture</li>
+                            <li>Microservices approach for Cloud Functions</li>
+                            <li>Secure payment processing</li>
+                            <li>Real-time notification delivery</li>
+                            <li>Geolocation-based service matching</li>
+                            <li>Scalable infrastructure</li>
+                            <li>Compliance with UK data protection regulations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Notification System -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-6">Notification System Architecture</h2>
+            
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-4">Firebase Cloud Messaging Implementation</h3>
+                <p class="mb-4">The notification system uses Firebase Cloud Messaging (FCM) to deliver real-time alerts to both freelancers and clients. The implementation follows a topic-based and direct messaging approach:</p>
+                
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-indigo-50 p-4 rounded-lg">
+                        <h4 class="font-semibold mb-2">Device Registration Process</h4>
+                        <ol class="list-decimal pl-5 space-y-1 text-sm">
+                            <li>Upon app installation, each device registers with FCM</li>
+                            <li>Device token is stored in Firestore under the user document</li>
+                            <li>Tokens are refreshed on app launch and login events</li>
+                            <li>Users can opt into specific notification categories during onboarding</li>
+                            <li>Notification preferences are stored and managed in the user profile</li>
+                        </ol>
+                    </div>
+                    <div class="bg-indigo-50 p-4 rounded-lg">
+                        <h4 class="font-semibold mb-2">Token Management</h4>
+                        <ol class="list-decimal pl-5 space-y-1 text-sm">
+                            <li>Cloud Functions manage token rotation and cleanup</li>
+                            <li>Invalid tokens are automatically removed</li>
+                            <li>Users can have multiple devices registered</li>
+                            <li>Tokens are associated with user roles (FREELANCER/CLIENT)</li>
+                            <li>Location-based topic subscriptions for Manchester area notifications</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 p-6 rounded-lg mb-6">
+                    <div class="architecture-diagram text-center">
+                        <svg viewBox="0 0 800 250" class="w-full">
+                            <!-- App -->
+                            <rect x="50" y="100" width="120" height="60" rx="10" fill="#3182ce" />
+                            <text x="110" y="135" text-anchor="middle" fill="white" font-weight="bold">Mobile App</text>
+                            
+                            <!-- FCM -->
+                            <rect x="250" y="100" width="120" height="60" rx="10" fill="#4c51bf" />
+                            <text x="310" y="135" text-anchor="middle" fill="white" font-weight="bold">FCM</text>
+                            
+                            <!-- Cloud Functions -->
+                            <rect x="450" y="40" width="120" height="60" rx="10" fill="#805ad5" />
+                            <text x="510" y="75" text-anchor="middle" fill="white" font-weight="bold">Cloud Functions</text>
+                            
+                            <!-- Firestore Triggers -->
+                            <rect x="450" y="160" width="120" height="60" rx="10" fill="#38a169" />
+                            <text x="510" y="195" text-anchor="middle" fill="white" font-weight="bold">Firestore</text>
+                            
+                            <!-- Admin Panel -->
+                            <rect x="650" y="100" width="120" height="60" rx="10" fill="#e53e3e" />
+                            <text x="710" y="135" text-anchor="middle" fill="white" font-weight="bold">Admin Panel</text>
+                            
+                            <!-- Arrows -->
+                            <line x1="170" y1="130" x2="250" y2="130" stroke="#718096" stroke-width="2" stroke-dasharray="5,5" />
+                            <polygon points="245,125 255,130 245,135" fill="#718096" />
+                            
+                            <line x1="370" y1="130" x2="650" y2="130" stroke="#718096" stroke-width="2" />
+                            <polygon points="645,125 655,130 645,135" fill="#718096" />
+                            
+                            <line x1="510" y1="100" x2="510" y2="160" stroke="#718096" stroke-width="2" />
+                            <polygon points="505,155 510,165 515,155" fill="#718096" />
+                            
+                            <line x1="450" y1="70" x2="370" y2="100" stroke="#718096" stroke-width="2" />
+                            <polygon points="374,97 365,105 379,106" fill="#718096" />
+                            
+                            <line x1="450" y1="190" x2="370" y2="160" stroke="#718096" stroke-width="2" />
+                            <polygon points="374,163 365,155 379,154" fill="#718096" />
+                            
+                            <line x1="650" y1="130" x2="570" y2="70" stroke="#718096" stroke-width="2" />
+                            <polygon points="573,74 565,65 578,67" fill="#718096" />
+                        </svg>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2 text-center">Figure 2: FCM notification flow architecture</p>
+                </div>
+
+                <h4 class="font-semibold mb-2">Message Delivery Strategies</h4>
+                <div class="grid md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h5 class="font-medium text-center mb-2">Direct Device Messaging</h5>
+                        <p class="text-sm">Used for user-specific notifications like job offers, messages, and payment confirmations. Delivered directly to user's registered devices.</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h5 class="font-medium text-center mb-2">Topic-Based Messaging</h5>
+                        <p class="text-sm">Used for broadcasts to specific groups like "Manchester Plumbers" or "Emergency Services." Users subscribe to relevant topics based on skills and location.</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h5 class="font-medium text-center mb-2">Condition-Based Messaging</h5>
+                        <p class="text-sm">Uses boolean conditions to target complex user segments. Example: All plumbers OR electricians within 10km of Manchester city center.</p>
+                    </div>
+                </div>
+
+                <h4 class="font-semibold mb-3">Message Structure</h4>
+                <div class="bg-gray-100 p-4 rounded-lg mb-6 overflow-x-auto">
+                    <pre class="text-sm">
+{
+  "message": {
+    "token": "user_device_token",  // or "topic": "manchester_plumbers"
+    "notification": {
+      "title": "New Job Available",
+      "body": "Kitchen renovation in Didsbury, £500-700"
+    },
+    "data": {
+      "jobId": "job123456",
+      "clientId": "client789",
+      "jobType": "renovation",
+      "location": "Didsbury",
+      "timestamp": "1629384756",
+      "clickAction": "JOB_DETAILS_ACTIVITY"
+    },
+    "android": {
+      "priority": "high",
+      "notification": {
+        "channel_id": "job_alerts",
+        "icon": "job_icon",
+        "color": "#3182CE"
+      }
+    },
+    "apns": {
+      "payload": {
+        "aps": {
+          "sound": "default",
+          "badge": 1,
+          "category": "JOB_CATEGORY"
+        }
+      }
+    }
+  }
+}</pre>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-4">Notification Types & Triggers</h3>
+                
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h4 class="font-semibold mb-3">For Freelancers</h4>
+                        <div class="space-y-4">
+                            <div class="notification-card bg-indigo-50 p-4 rounded-lg">
+                                <h5 class="font-medium">New Job Alerts</h5>
+                                <p class="text-sm mt-1">Notifies freelancers of new jobs matching their skills within their specified Manchester service area.</p>
+                                <div class="mt-2 text-xs text-gray-600">
+                                    <div><span class="font-medium">Trigger:</span> New job posting matching freelancer criteria</div>
+                                    <div><span class="font-medium">Priority:</span> High</div>
+                                    <div><span class="font-medium">Action:</span> View job details</div>
+                                </div>
+                            </div>
+                            
+                            <div class="notification-card bg-indigo-50 p-4 rounded-lg">
+                                <h5 class="font-medium">Job Application Response</h5>
+                                <p class="text-sm mt-1">Alerts when a client accepts or rejects a job application.</p>
+                                <div class="mt-2 text-xs text-gray-600">
+                                    <div><span class="font-medium">Trigger:</span> Client decision on application</div>
+                                    <div><span class="font-medium">Priority:</span> High</div>
+                                    <div><span class="font-medium">Action:</span> View job details with status update</div>
+                                </div>
+                            </div>
+                            
+                            <div class="notification-card bg-indigo-50 p-4 rounded-lg">
+                                <h5 class="font-medium">Payment Received</h5>
+                                <p class="text-sm mt-1">Notification when a client releases payment for completed work.</p>
+                                <div class="mt-2 text-xs text-gray-600">
+                                    <div><span class="font-medium">Trigger:</span> Payment release by client</div>
+                                    <div><span class="font-medium">Priority:</span> High</div>
+                                    <div><span class="font-medium">Action:</span> View payment details</div>
+                                </div>
+                            </div>
+                            
+                            <div class="notification-card bg-indigo-50 p-4 rounded-lg">
+                                <h5 class="font-medium">New Review</h5>
+                                <p class="text-sm mt-1">Alerts freelancers when they receive a new review from a client.</p>
+                                <div class="mt-2 text-xs text-gray-600">
+                                    <div><span class="font-medium">Trigger:</span> Client submits review</div>
+                                    <div><span class="font-medium">Priority:</span> Medium</div>
+                                    <div><span class="font-medium">Action:</span> View review</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-semibold mb-3">For Clients</h4>
+                        <div class="space-y-4">
+                            <div class="notification-card bg-indigo-50 p-4 rounded-lg">
+                                <h5 class="font-medium">Job Application Received</h5>
+                                <p class="text-sm mt-1">Notifies clients when a freelancer applies for their posted job.</p>
+                                <div class="mt-2 text-xs text-gray-600">
+                                    <div><span class="font-medium">Trigger:</span> Freelancer submits application</div>
+                                    <div><span class="font-medium">Priority:</span> High</div>
+                                    <div><span class="font-medium">Action:</span> View application</div>
+                                </div>
+                            </div>
+                            
+                            <div class="notification-card bg-indigo-50 p-4 rounded-lg">
+                                <h5 class="font-medium">Job Status Updates</h5>
+                                <p class="text-sm mt-1">Alerts when a freelancer updates job status (started, in progress, completed).</p>
+                                <div class="mt-2 text-xs text-gray-600">
+                                    <div><span class="font-medium">Trigger:</span> Freelancer changes job status</div>
+                                    <div><span class="font-medium">Priority:</span> Medium</div>
+                                    <div><span class="font-medium">Action:</span> View job details</div>
+                                </div>
+                            </div>
+                            
+                            <div class="notification-card bg-indigo-50 p-4 rounded-lg">
+                                <h5 class="font-medium">Payment Request</h5>
+                                <p class="text-sm mt-1">Notification when a freelancer requests payment for completed work.</p>
+                                <div class="mt-2 text-xs text-gray-600">
+                                    <div><span class="font-medium">Trigger:</span> Freelancer marks job as complete</div>
+                                    <div><span class="font-medium">Priority:</span> High</div>
+                                    <div><span class="font-medium">Action:</span> Review and release payment</div>
+                                </div>
+                            </div>
+                            
+                            <div class="notification-card bg-indigo-50 p-4 rounded-lg">
+                                <h5 class="font-medium">Nearby Freelancer Alert</h5>
+                                <p class="text-sm mt-1">Notifies clients of skilled freelancers who have recently become available in their area.</p>
+                                <div class="mt-2 text-xs text-gray-600">
+                                    <div><span class="font-medium">Trigger:</span> Freelancer status change to "Available" nearby</div>
+                                    <div><span class="font-medium">Priority:</span> Medium</div>
+                                    <div><span class="font-medium">Action:</span> View freelancer profile</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h4 class="font-semibold mb-3">Administrative & System Notifications</h4>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="notification-card bg-indigo-50 p-3 rounded-lg">
+                        <h5 class="font-medium text-sm">Account Verification</h5>
+                        <p class="text-xs mt-1">Alerts users to verify their accounts, documents, or certifications.</p>
+                    </div>
+                    <div class="notification-card bg-indigo-50 p-3 rounded-lg">
+                        <h5 class="font-medium text-sm">Local Event Notifications</h5>
+                        <p class="text-xs mt-1">Updates about Manchester construction events, new regulations, or networking opportunities.</p>
+                    </div>
+                    <div class="notification-card bg-indigo-50 p-3 rounded-lg">
+                        <h5 class="font-medium text-sm">System Maintenance</h5>
+                        <p class="text-xs mt-1">Alerts about planned maintenance or service updates.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Cloud Functions Architecture -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-6">Cloud Functions Architecture</h2>
+            
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-4">Functions Framework & Organization</h3>
+                <p class="mb-4">The application uses Firebase Cloud Functions to handle backend logic, implement workflows, process payments, and manage notifications. The functions are organized by domain and trigger type:</p>
+                
+                <div class="bg-purple-50 p-4 rounded-lg mb-6">
+                    <h4 class="font-semibold mb-2">Function Organization Structure</h4>
+                    <pre class="text-sm">
+/functions
+  ├── /src
+  │    ├── /auth             # Authentication-related functions
+  │    ├── /jobs             # Job posting and management functions
+  │    ├── /notifications    # Notification delivery functions
+  │    ├── /payments         # Payment processing functions
+  │    ├── /geolocation      # Location-based functions
+  │    ├── /admin            # Administrative functions
+  │    ├── /utils            # Shared utility functions
+  │    └── index.ts          # Entry point that imports and exports all functions
+  ├── package.json
+  └── tsconfig.json</pre>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-purple-50 p-4 rounded-lg">
+                        <h4 class="font-semibold mb-2">Function Types</h4>
+                        <ul class="list-disc pl-5 space-y-1 text-sm">
+                            <li><span class="font-medium">HTTP Triggers</span>: For API endpoints and webhooks</li>
+                            <li><span class="font-medium">Firestore Triggers</span>: React to database changes</li>
+                            <li><span class="font-medium">Auth Triggers</span>: Handle user creation and deletion</li>
+                            <li><span class="font-medium">Scheduled Functions</span>: Run periodic tasks</li>
+                            <li><span class="font-medium">Pub/Sub Triggers</span>: Process background tasks</li>
+                            <li><span class="font-medium">Storage Triggers</span>: React to file uploads/changes</li>
+                        </ul>
+                    </div>
+                    <div class="bg-purple-50 p-4 rounded-lg">
+                        <h4 class="font-semibold mb-2">Development Principles</h4>
+                        <ul class="list-disc pl-5 space-y-1 text-sm">
+                            <li><span class="font-medium">TypeScript</span> for type safety and better maintainability</li>
+                            <li><span class="font-medium">Unit Testing</span> for critical functions</li>
+                            <li><span class="font-medium">Modular Design</span> with shared utility functions</li>
+                            <li><span class="font-medium">Error Handling</span> with structured logging</li>
+                            <li><span class="font-medium">Dependency Injection</span> for testable code</li>
+                            <li><span class="font-medium">Regional Deployment</span> to europe-west2 (London) for low latency</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h4 class="font-semibold mb-3">Key Function Categories</h4>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white">
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-600 uppercase text-sm">
+                                <th class="py-3 px-4 text-left">Category</th>
+                                <th class="py-3 px-4 text-left">Trigger Type</th>
+                                <th class="py-3 px-4 text-left">Example Functions</th>
+                                <th class="py-3 px-4 text-left">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-600 text-sm">
+                            <tr class="border-b border-gray-200">
+                                <td class="py-3 px-4 font-medium">User Management</td>
+                                <td class="py-3 px-4">Auth Triggers</td>
+                                <td class="py-3 px-4">createUserProfile<br>updateUserAvailability</td>
+                                <td class="py-3 px-4">Handle user creation, profile updates, and user-related tasks</td>
+                            </tr>
+                            <tr class="border-b border-gray-200 bg-gray-50">
+                                <td class="py-3 px-4 font-medium">Job Management</td>
+                                <td class="py-3 px-4">Firestore Triggers</td>
+                                <td class="py-3 px-4">onJobCreated<br>onJobStatusChanged</td>
+                                <td class="py-3 px-4">Process job postings, applications, and status changes</td>
+                            </tr>
+                            <tr class="border-b border-gray-200">
+                                <td class="py-3 px-4 font-medium">Notification</td>
+                                <td class="py-3 px-4">Firestore, HTTP</td>
+                                <td class="py-3 px-4">sendJobAlert<br>notifyJobStatusChange</td>
+                                <td class="py-3 px-4">Send FCM notifications based on various triggers</td>
+                            </tr>
+                            <tr class="border-b border-gray-200 bg-gray-50">
+                                <td class="py-3 px-4 font-medium">Payment</td>
+                                <td class="py-3 px-4">HTTP, Firestore</td>
+                                <td class="py-3 px-4">createPaymentIntent<br>processPayoutRequest</td>
+                                <td class="py-3 px-4">Handle payment processing with Stripe/PayPal</td>
+                            </tr>
+                            <tr class="border-b border-gray-200">
+                                <td class="py-3 px-4 font-medium">Geolocation</td>
+                                <td class="py-3 px-4">HTTP, Firestore</td>
+                                <td class="py-3 px-4">updateUserLocation<br>findNearbyJobs</td>
+                                <td class="py-3 px-4">Process location data and proximity-based matching</td>
+                            </tr>
+                            <tr class="bg-gray-50">
+                                <td class="py-3 px-4 font-medium">Admin</td>
+                                <td class="py-3 px-4">HTTP, Scheduled</td>
+                                <td class="py-3 px-4">generateReports<br>cleanupOldData</td>
+                                <td class="py-3 px-4">Handle administrative tasks and system maintenance</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-4">Payment Processing Functions</h3>
+                
+                <div class="flex flex-col md:flex-row gap-6 mb-6">
+                    <div class="md:w-1/2">
+                        <p class="mb-4">The payment system uses Firebase Cloud Functions to integrate with Stripe Connect for handling marketplace payments between clients and freelancers in the Manchester construction market.</p>
+                        
+                        <h4 class="font-semibold mb-2">Key Payment Workflows</h4>
+                        <ol class="list-decimal pl-5 space-y-1 text-sm mb-4">
+                            <li>Client creates escrow payment when hiring a freelancer</li>
+                            <li>System holds funds until job is completed</li>
+                            <li>Freelancer marks job as complete and requests payment</li>
+                            <li>Client approves completed work and releases payment</li>
+                            <li>System transfers funds to freelancer (minus platform fee)</li>
+                            <li>Both parties receive payment confirmation notifications</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="md:w-1/2">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h4 class="font-semibold mb-2">Payment Security Measures</h4>
+                            <ul class="list-disc pl-5 space-y-1 text-sm">
+                                <li>PCI-compliant payment processing through Stripe</li>
+                                <li>No storage of payment card details in Firebase</li>
+                                <li>Secure payment tokens for client transactions</li>
+                                <li>Multi-stage verification for payment release</li>
+                                <li>Automatic detection of suspicious transaction patterns</li>
+                                <li>Compliance with UK financial regulations</li>
+                                <li>Transaction logging for audit purposes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <h4 class="font-semibold mb-3">Payment Cloud Functions</h4>
+                <div class="space-y-4">
+                    <div class="payment-card bg-red-50 p-4 rounded-lg">
+                        <h5 class="font-medium">createPaymentIntent</h5>
+                        <p class="text-sm mt-1">Creates a payment intent when a client hires a freelancer, setting up the escrow payment.</p>
+                        <div class="mt-2 grid grid-cols-2 gap-2 text-xs">
+                            <div><span class="font-medium">Trigger:</span> HTTP request</div>
+                            <div><span class="font-medium">Input:</span> jobId, clientId, amount</div>
+                            <div><span class="font-medium">Output:</span> paymentIntentId, clientSecret</div>
+                            <div><span class="font-medium">Security:</span> Firebase Auth validation</div>
+                        </div>
+                        <div class="mt-2 text-xs bg-white p-2 rounded">
+                            <pre>exports.createPaymentIntent = functions
+  .region('europe-west2')
+  .https.onCall(async (data, context) => {
+    // Authenticate user
+    // Create Stripe payment intent
+    // Store payment record in Firestore
+    // Return client secret for frontend
+  });</pre>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-card bg-red-50 p-4 rounded-lg">
+                        <h5 class="font-medium">releasePaymentToFreelancer</h5>
+                        <p class="text-sm mt-1">Releases escrow funds to the freelancer after job completion is confirmed by the client.</p>
+                        <div class="mt-2 grid grid-cols-2 gap-2 text-xs">
+                            <div><span class="font-medium">Trigger:</span> HTTP request</div>
+                            <div><span class="font-medium">Input:</span> jobId, paymentId</div>
+                            <div><span class="font-medium">Output:</span> transferId, status</div>
+                            <div><span class="font-medium">Security:</span> Client verification</div>
+                        </div>
+                        <div class="mt-2 text-xs bg-white p-2 rounded">
+                            <pre>exports.releasePaymentToFreelancer = functions
+  .region('europe-west2')
+  .https.onCall(async (data, context) => {
+    // Verify client is job owner
+    // Check job completion status
+    // Process transfer to freelancer account
+    // Update payment records
+    // Send notifications to both parties
+  });</pre>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-card bg-red-50 p-4 rounded-lg">
+                        <h5 class="font-medium">handleStripeWebhook</h5>
+                        <p class="text-sm mt-1">Processes webhook events from Stripe to handle payment status updates and errors.</p>
+                        <div class="mt-2 grid grid-cols-2 gap-2 text-xs">
+                            <div><span class="font-medium">Trigger:</span> HTTP webhook</div>
+                            <div><span class="font-medium">Input:</span> Stripe event object</div>
+                            <div><span class="font-medium">Output:</span> HTTP response</div>
+                            <div><span class="font-medium">Security:</span> Webhook signature verification</div>
+                        </div>
+                        <div class="mt-2 text-xs bg-white p-2 rounded">
+                            <pre>exports.handleStripeWebhook = functions
+  .region('europe-west2')
+  .https.onRequest(async (req, res) => {
+    // Verify webhook signature
+    // Process different event types
+    // Update payment records in Firestore
+    // Handle payment failures
+    // Send appropriate notifications
+  });</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-4">Geolocation Functions</h3>
+                
+                <div class="flex flex-col md:flex-row gap-6 mb-6">
+                    <div class="md:w-1/2">
+                        <p class="mb-4">The application uses specialized geolocation functions to match Manchester-based construction freelancers with nearby jobs. These functions leverage GeoFirestore for efficient geo-queries.</p>
+                        
+                        <h4 class="font-semibold mb-2">Location-Based Features</h4>
+                        <ul class="list-disc pl-5 space-y-1 text-sm mb-4">
+                            <li>Nearby job discovery for freelancers</li>
+                            <li>Freelancer search based on client location</li>
+                            <li>Distance-based filtering and sorting</li>
+                            <li>Service area registration for freelancers</li>
+                            <li>Location-specific job notifications</li>
+                            <li>Travel distance and time estimation</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="md:w-1/2">
+                        <div class="bg-orange-50 p-4 rounded-lg">
+                            <h4 class="font-semibold mb-2">Manchester-Specific Optimizations</h4>
+                            <ul class="list-disc pl-5 space-y-1 text-sm">
+                                <li>Pre-defined popular areas (City Centre, Salford, Didsbury, etc.)</li>
+                                <li>Support for Manchester postal codes (M1-M90)</li>
+                                <li>Integration with local transportation routes</li>
+                                <li>Neighborhood-based search refinement</li>
+                                <li>Adjustable search radius with Manchester-appropriate defaults</li>
+                                <li>Traffic-aware travel time estimation during rush hours</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <h4 class="font-semibold mb-3">Geolocation Cloud Functions</h4>
+                <div class="space-y-4">
+                    <div class="geolocation-card bg-orange-50 p-4 rounded-lg">
+                        <h5 class="font-medium">updateUserLocation</h5>
+                        <p class="text-sm mt-1">Updates a user's location and recalculates their geo-hash for efficient proximity queries.</p>
+                        <div class="mt-2 grid grid-cols-2 gap-2 text-xs">
+                            <div><span class="font-medium">Trigger:</span> HTTP request</div>
+                            <div><span class="font-medium">Input:</span> userId, latitude, longitude</div>
+                            <div><span class="font-medium">Output:</span> Updated location data</div>
+                            <div><span class="font-medium">Security:</span> User authentication</div>
+                        </div>
+                        <div class="mt-2 text-xs bg-white p-2 rounded">
+                            <pre>exports.updateUserLocation = functions
+  .region('europe-west2')
+  .https.onCall(async (data, context) => {
+    // Verify authentication
+    // Update GeoFirestore document
+    // Update user's location history
+    // Recalculate nearby jobs if freelancer
+  });</pre>
+                        </div>
+                    </div>
+                    
+                    <div class="geolocation-card bg-orange-50 p-4 rounded-lg">
+                        <h5 class="font-medium">findNearbyJobsForFreelancer</h5>
+                        <p class="text-sm mt-1">Performs a geo-query to find jobs within a freelancer's specified radius around Manchester.</p>
+                        <div class="mt-2 grid grid-cols-2 gap-2 text-xs">
+                            <div><span class="font-medium">Trigger:</span> HTTP request</div>
+                            <div><span class="font-medium">Input:</span> freelancerId, radius, skills</div>
+                            <div><span class="font-medium">Output:</span> List of nearby jobs</div>
+                            <div><span class="font-medium">Security:</span> Freelancer role verification</div>
+                        </div>
+                        <div class="mt-2 text-xs bg-white p-2 rounded">
+                            <pre>exports.findNearbyJobsForFreelancer = functions
+  .region('europe-west2')
+  .https.onCall(async (data, context) => {
+    // Get freelancer location and preferences
+    // Query GeoFirestore for jobs within radius
+    // Filter by matching skills
+    // Sort by distance and relevance
+    // Return paginated results
+  });</pre>
+                        </div>
+                    </div>
+                    
+                    <div class="geolocation-card bg-orange-50 p-4 rounded-lg">
+                        <h5 class="font-medium">notifyFreelancersNearJob</h5>
+                        <p class="text-sm mt-1">When a new job is posted, finds and notifies qualified freelancers working in that area of Manchester.</p>
+                        <div class="mt-2 grid grid-cols-2 gap-2 text-xs">
+                            <div><span class="font-medium">Trigger:</span> Firestore trigger</div>
+                            <div><span class="font-medium">Input:</span> New job document</div>
+                            <div><span class="font-medium">Output:</span> Notification dispatch</div>
+                            <div><span class="font-medium">Security:</span> Internal function</div>
+                        </div>
+                        <div class="mt-2 text-xs bg-white p-2 rounded">
+                            <pre>exports.notifyFreelancersNearJob = functions
+  .region('europe-west2')
+  .firestore.document('jobs/{jobId}')
+  .onCreate(async (snapshot, context) => {
+    // Get job location and requirements
+    // Find freelancers within job radius with matching skills
+    // Filter by availability status
+    // Send FCM notifications to qualified freelancers
+    // Log notification metrics
+  });</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-xl font-semibold mb-4">Administrative Functions</h3>
+                
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <p class="mb-4">Administrative functions handle platform management, reporting, and maintenance tasks to ensure smooth operation of the Manchester-focused construction marketplace.</p>
+                        
+                        <h4 class="font-semibold mb-2">Key Administrative Tasks</h4>
+                        <ul class="list-disc pl-5 space-y-1 text-sm">
+                            <li>User verification and document approval</li>
+                            <li>Platform usage analytics and reporting</li>
+                            <li>Content moderation for job postings</li>
+                            <li>Dispute resolution between clients and freelancers</li>
+                            <li>System maintenance and data cleanup</li>
+                            <li>Service quality monitoring</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-purple-50 p-4 rounded-lg">
+                        <h4 class="font-semibold mb-2">Data Retention & Privacy</h4>
+                        <p class="text-sm mb-2">The application complies with UK data protection regulations, including GDPR. Administrative functions include:</p>
+                        <ul class="list-disc pl-5 space-y-1 text-sm">
+                            <li>Automated data retention policy enforcement</li>
+                            <li>User data export for GDPR compliance</li>
+                            <li>Data anonymization for reporting purposes</li>
+                            <li>Regular cleanup of inactive accounts</li>
+                            <li>Audit logging for administrative actions</li>
+                            <li>Secure access controls for administrative functions</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h4 class="font-semibold mb-3">Administrative Cloud Functions</h4>
+                <div class="space-y-4">
+                    <div class="admin-card bg-purple-50 p-4 rounded-lg">
+                        <h5 class="font-medium">verifyFreelancerDocuments</h5>
+                        <p class="text-sm mt-1">Reviews and approves submitted freelancer verification documents like qualifications and certificates.</p>
+                        <div class="mt-2 grid grid-cols-2 gap-2 text-xs">
+                            <div><span class="font-medium">Trigger:</span> HTTP request / Storage trigger</div>
+                            <div><span class="font-medium">Input:</span> documentId, reviewDecision</div>
+                            <div><span class="font-medium">Output:</span> Verification status update</div>
+                            <div><span class="font-medium">Security:</span> Admin role verification</div>
+                        </div>
+                        <div class="mt-2 text-xs bg-white p-2 rounded">
+                            <pre>exports.verifyFreelancerDocuments = functions
+  .region('europe-west2')
+  .https.onCall(async (data, context) => {
+    // Verify admin permissions
+    // Process verification decision
+    // Update freelancer verification status
+    // Send notification to freelancer
+    // Log verification action
+  });</pre>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-card bg-purple-50 p-4 rounded-lg">
+                        <h5 class="font-medium">generateMarketplaceReports</h5>
+                        <p class="text-sm mt-1">Scheduled function that generates daily/weekly reports on marketplace activity in Manchester.</p>
+                        <div class="mt-2 grid grid-cols-2 gap-2 text-xs">
+                            <div><span class="font-medium">Trigger:</span> Scheduled (cron)</div>
+                            <div><span class="font-medium">Input:</span> Time period parameters</div>
+                            <div><span class="font-medium">Output:</span> Generated reports</div>
+                            <div><span class="font-medium">Security:</span> Internal function</div>
+                        </div>
+                        <div class="mt-2 text-xs bg-white p-2 rounded">
+                            <pre>exports.generateMarketplaceReports = functions
+  .region('europe-west2')
+  .pubsub.schedule('0 5 * * *')  // Daily at 5:00 AM
+  .timeZone('Europe/London')
+  .onRun(async (context) => {
+    // Aggregate job posting data
+    // Calculate marketplace metrics
+    // Generate PDF/CSV reports
+    // Store in admin storage bucket
+    // Send notification to admins
+  });</pre>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-card bg-purple-50 p-4 rounded-lg">
+                        <h5 class="font-medium">moderateJobContent</h5>
+                        <p class="text-sm mt-1">Reviews new job postings to ensure they comply with platform policies and UK regulations.</p>
+                        <div class="mt-2 grid grid-cols-2 gap-2 text-xs">
+                            <div><span class="font-medium">Trigger:</span> Firestore trigger</div>
+                            <div><span class="font-medium">Input:</span> Job document</div>
+                            <div><span class="font-medium">Output:</span> Moderation decision</div>
+                            <div><span class="font-medium">Security:</span> Internal function</div>
+                        </div>
+                        <div class="mt-2 text-xs bg-white p-2 rounded">
+                            <pre>exports.moderateJobContent = functions
+  .region('europe-west2')
+  .firestore.document('jobs/{jobId}')
+  .onCreate(async (snapshot, context) => {
+    // Extract job content for review
+    // Check for prohibited content or scams
+    // Flag suspicious listings for admin review
+    // Update job visibility status
+    // Notify client of moderation outcome
+  });</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Deployment & Operations -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-6">Deployment & Operations</h2>
+            
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">Regional Configuration</h3>
+                        <p class="mb-4">All Firebase services are configured to optimize performance for the Manchester, UK market:</p>
+                        
+                        <ul class="list-disc pl-5 space-y-1 text-sm">
+                            <li><span class="font-medium">Cloud Functions Region:</span> europe-west2 (London)</li>
+                            <li><span class="font-medium">Firestore Database:</span> europe-west2 multi-region</li>
+                            <li><span class="font-medium">Storage Buckets:</span> EU multi-region</li>
+                            <li><span class="font-medium">FCM Configuration:</span> EU data residency</li>
+                            <li><span class="font-medium">Time Zone Settings:</span> Europe/London</li>
+                        </ul>
+                        
+                        <div class="mt-4">
+                            <h4 class="font-semibold mb-2">Deployment Pipeline</h4>
+                            <ol class="list-decimal pl-5 space-y-1 text-sm">
+                                <li>Development environment testing</li>
+                                <li>Automated testing with Jest</li>
+                                <li>Staging environment deployment</li>
+                                <li>Integration testing</li>
+                                <li>Production deployment with Firebase CLI</li>
+                                <li>Post-deployment verification</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">Monitoring & Maintenance</h3>
+                        
+                        <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-semibold mb-2">Performance Monitoring</h4>
+                            <ul class="list-disc pl-5 space-y-1 text-sm">
+                                <li>Firebase Performance Monitoring for client-side metrics</li>
+                                <li>Cloud Functions execution time tracking</li>
+                                <li>Firestore query performance analysis</li>
+                                <li>Network latency monitoring for Manchester users</li>
+                                <li>Error rate tracking and alerting</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h4 class="font-semibold mb-2">Operational Tasks</h4>
+                            <ul class="list-disc pl-5 space-y-1 text-sm">
+                                <li>Daily database backups</li>
+                                <li>Weekly security review and updates</li>
+                                <li>Monthly cost optimization analysis</li>
+                                <li>Quarterly capacity planning</li>
+                                <li>Scheduled maintenance during off-peak hours</li>
+                                <li>Incident response procedures</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h3 class="text-xl font-semibold mb-3">Scaling Considerations</h3>
+                    <p class="mb-3">The system is designed to scale as the Manchester construction marketplace grows:</p>
+                    
+                    <div class="grid md:grid-cols-3 gap-4 text-sm">
+                        <div>
+                            <h4 class="font-semibold mb-1">Short-term (0-6 months)</h4>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>Initial focus on Manchester city center</li>
+                                <li>Basic notification categories</li>
+                                <li>Essential cloud functions</li>
+                                <li>Manual administrative processes</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-1">Mid-term (6-12 months)</h4>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>Expansion to Greater Manchester</li>
+                                <li>Advanced notification personalization</li>
+                                <li>Optimized geo-query functions</li>
+                                <li>Semi-automated admin workflows</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-1">Long-term (12+ months)</h4>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>Northwest England expansion</li>
+                                <li>ML-based job matching</li>
+                                <li>Predictive notification system</li>
+                                <li>Fully automated admin processes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-6">Conclusion</h2>
+            
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <p class="mb-4">This document outlines a comprehensive notification system and Cloud Functions architecture for a construction freelancer marketplace app serving the Manchester, UK region. The architecture leverages Firebase Cloud Messaging for real-time notifications and Firebase Cloud Functions for serverless backend operations.</p>
+                
+                <p class="mb-4">The system is designed with scalability, security, and regional specificity in mind, ensuring optimal performance for both freelancers and clients in the Manchester construction market. The notification system provides timely, relevant alerts while the Cloud Functions architecture handles everything from payment processing to geo-location services.</p>
+                
+                <p>Implementation of this architecture will create a robust foundation for the marketplace, enabling efficient matching of construction freelancers with local clients while maintaining a secure, responsive platform that can grow alongside user demand.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="gradient-header text-white py-6 px-6">
+        <div class="container mx-auto text-center">
+            <p>Construction Freelancer Marketplace App - Firebase Architecture</p>
+            <p class="text-sm mt-2">Manchester, UK Focus | Firebase Cloud Messaging | Firebase Cloud Functions</p>
+        </div>
+    </footer>
+</body>
+</html>
