@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Move 4 Freedom - Automated B2B Lead Generation</title>
+    <title>Move 4 Freedom - AI Growth Engine for Marketing Agencies</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -13,31 +13,25 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-        .cta-button-light {
+        .cta-button-main {
             transition: all 0.2s ease-in-out;
             letter-spacing: 0.5px;
             display: inline-flex; 
             align-items: center; 
             justify-content: center;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
         }
-        .cta-button-light:hover {
+        .cta-button-main:hover {
             transform: scale(1.05) translateY(-2px); 
-            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3); 
-        }
-        .cta-button-light .arrow-icon {
-            transition: transform 0.2s ease-in-out;
-            margin-left: 0.75rem;
-        }
-        .cta-button-light:hover .arrow-icon {
-            transform: translateX(4px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.5); 
         }
         .feature-card-light {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             border: 1px solid #e5e7eb; /* gray-200 */
         }
         .feature-card-light:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.15);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.2);
         }
         .section-title-light {
             font-weight: 900; 
@@ -45,9 +39,6 @@
         }
         .highlight-accent-light {
             color: #3b82f6; /* Tailwind Blue-500 */
-        }
-        .guarantee-box-light {
-            border-left: 4px solid #3b82f6; /* Blue-500 */
         }
         #mobile-menu {
             max-height: 0;
@@ -64,21 +55,32 @@
             visibility: visible;
         }
         .testimonial-img {
-            width: 60px;
-            height: 60px;
+            width: 72px;
+            height: 72px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid #3b82f6;
+            border: 3px solid #3b82f6;
         }
-        .loom-button {
-            box-shadow: 0 4px 14px 0 rgb(0 118 255 / 39%);
+        .about-img {
+            width: 128px;
+            height: 128px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #3b82f6;
         }
-        .loom-button:hover {
-             box-shadow: 0 6px 20px rgb(0 118 255 / 23%);
+        /* Styles for the new audit form */
+        .audit-form input[type="text"] {
+            border: 2px solid #d1d5db; /* gray-300 */
+            transition: border-color 0.2s ease-in-out;
+        }
+        .audit-form input[type="text"]:focus {
+            border-color: #3b82f6; /* blue-500 */
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-white text-gray-900">
 
     <nav class="bg-white/80 backdrop-blur-md shadow-md fixed w-full z-50 top-0">
         <div class="container mx-auto px-6 py-3.5 flex justify-between items-center">
@@ -86,10 +88,11 @@
                 Move<span class="text-blue-500">4</span>Freedom
             </a>
             <div class="hidden md:flex space-x-4 items-center">
-                <a href="#offer" class="text-gray-600 hover:text-blue-600 transition-colors px-2 py-1 text-sm font-medium">The Offer</a>
-                <a href="#solutions" class="text-gray-600 hover:text-blue-600 transition-colors px-2 py-1 text-sm font-medium">System</a>
+                <a href="#problem" class="text-gray-600 hover:text-blue-600 transition-colors px-2 py-1 text-sm font-medium">The Problem</a>
+                <a href="#solution" class="text-gray-600 hover:text-blue-600 transition-colors px-2 py-1 text-sm font-medium">The Solution</a>
                 <a href="#proof" class="text-gray-600 hover:text-blue-600 transition-colors px-2 py-1 text-sm font-medium">Proof</a>
-                <a href="https://calendly.com/rogermalek1987" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-5 rounded-md cta-button-light text-sm">BOOK MY FREE CALL</a>
+                <a href="#about" class="text-gray-600 hover:text-blue-600 transition-colors px-2 py-1 text-sm font-medium">About Me</a>
+                <a href="https://calendly.com/rogermalek1987" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-5 rounded-md cta-button-light text-sm">BOOK A CALL</a>
             </div>
             <div class="md:hidden">
                 <button id="mobile-menu-button" class="text-gray-600 hover:text-gray-900 focus:outline-none" aria-label="Open mobile menu" aria-expanded="false">
@@ -98,169 +101,174 @@
             </div>
         </div>
         <div id="mobile-menu" class="md:hidden bg-white border-t border-gray-200">
-            <a href="#offer" class="block py-3 px-6 text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-colors font-medium">The Offer</a>
-            <a href="#solutions" class="block py-3 px-6 text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-colors font-medium">System</a>
+            <a href="#problem" class="block py-3 px-6 text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-colors font-medium">The Problem</a>
+            <a href="#solution" class="block py-3 px-6 text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-colors font-medium">The Solution</a>
             <a href="#proof" class="block py-3 px-6 text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-colors font-medium">Proof</a>
-            <a href="https://calendly.com/rogermalek1987" target="_blank" rel="noopener noreferrer" class="block py-3.5 px-6 text-white bg-blue-600 hover:bg-blue-700 text-center rounded-b-lg font-bold">BOOK MY FREE CALL</a>
+            <a href="#about" class="block py-3 px-6 text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-colors font-medium">About Me</a>
+            <a href="https://calendly.com/rogermalek1987" target="_blank" rel="noopener noreferrer" class="block py-3.5 px-6 text-white bg-blue-600 hover:bg-blue-700 text-center rounded-b-lg font-bold">BOOK A CALL</a>
         </div>
     </nav>
 
     <header id="offer" class="pt-36 pb-24 md:pt-48 md:pb-36 bg-white">
         <div class="container mx-auto px-6 text-center">
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-black mb-6 leading-tight uppercase">
-                <span class="block">WE BUILD YOU A LEAD GENERATION MACHINE</span>
-                <span class="block text-3xl sm:text-4xl md:text-5xl mt-2">THAT GUARANTEES <span class="highlight-accent-light">15+ QUALIFIED APPOINTMENTS</span> MONTHLY</span>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-black mb-4 leading-tight uppercase">
+                <span class="block">Stop Chasing & Start Closing:</span>
+                <span class="block highlight-accent-light">Your AI-Powered Growth Engine for Marketing Agencies</span>
             </h1>
-            <p class="text-md sm:text-lg md:text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
-                An automated AI system that fills your pipeline with ideal clients using deep personalization and relentless follow-ups. <span class="font-bold">You just take the sales calls.</span>
+            <p class="text-md sm:text-lg md:text-xl text-gray-600 mb-10 max-w-3xl mx-auto">
+                Transform leads into loyal clients, free up <span class="font-bold">30+ hours/month</span>, and scale your agency without adding headcount. This isn't just automation; it's unfair advantage.
             </p>
-            <a href="https://calendly.com/rogermalek1987" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-4 px-10 md:px-12 rounded-md text-lg md:text-xl cta-button-light shadow-lg uppercase">
-                <span>Start Getting Leads Now!</span>
-                <svg class="w-6 h-6 arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-            </a>
-            <p class="mt-6 text-sm text-gray-500">(Book Your FREE "Automated Growth" Strategy Call)</p>
+            
+            <!-- New Audit Form -->
+            <div class="mt-8 max-w-lg mx-auto">
+                <p class="font-semibold text-lg mb-4">Get Your FREE, Instant AI-Powered Website Audit 👇</p>
+                <form action="https://primary-production-58a3.up.railway.app/form-test/5ddf4819-1e09-4b7c-88d7-278ce226571e" method="post" class="audit-form flex flex-col sm:flex-row gap-2">
+                    <input type="text" id="landingUrl" name="landingUrl" placeholder="Enter your website URL..." class="w-full px-4 py-3 rounded-md text-lg">
+                    <input type="submit" value="Get My Free Audit" class="bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-3 px-6 rounded-md text-lg cta-button-main shadow-lg uppercase cursor-pointer whitespace-nowrap">
+                </form>
+            </div>
+
+            <p class="mt-4 text-sm text-gray-500">(No-obligation. See how AI can transform your agency.)</p>
         </div>
     </header>
 
-    <section class="py-16 md:py-20 bg-gray-100">
+    <section id="problem" class="py-16 md:py-20 bg-gray-100 border-y border-gray-200">
         <div class="container mx-auto px-6">
-            <h2 class="section-title-light text-3xl md:text-4xl text-center mb-3 text-gray-900">IS YOUR CALENDAR EMPTY?</h2>
-            <p class="text-center text-gray-500 mb-10 md:mb-12 max-w-3xl mx-auto text-md sm:text-lg">
-                If you're an agency, consultant, or B2B service provider, you're likely struggling with one of these...
-            </p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 text-center">
-                    <h3 class="text-xl font-bold mb-1 text-red-600">🔴 NO LEADS</h3>
-                    <p class="text-gray-600 text-sm">Your pipeline is dry and unpredictable.</p>
+            <div class="text-center">
+                <h2 class="section-title-light text-3xl md:text-4xl text-gray-900">Are You Still Trading Time for Clients?</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">You're a brilliant marketing agency, driving results for your clients. But let's be honest, growth isn't always glamorous. You're probably battling:</p>
+            </div>
+            <div class="mt-12 grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold text-red-600 mb-2">Endless Hours on Manual Audits</h3>
+                    <p>Crafting custom pitches takes forever, slowing down your sales cycle.</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 text-center">
-                    <h3 class="text-xl font-bold mb-1 text-red-600">🔴 HATE PROSPECTING</h3>
-                    <p class="text-gray-600 text-sm">Wasting hours on manual, repetitive work.</p>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold text-red-600 mb-2">Leads Slipping Through the Cracks</h3>
+                    <p>Following up consistently feels like a full-time job, and missed opportunities cost you big.</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 text-center">
-                    <h3 class="text-xl font-bold mb-1 text-red-600">🔴 EMAILS IGNORED</h3>
-                    <p class="text-gray-600 text-sm">Your outreach lands in spam or gets deleted.</p>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold text-red-600 mb-2">Report Generation Headaches</h3>
+                    <p>Spending days compiling monthly reports instead of focusing on client strategy.</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 text-center">
-                    <h3 class="text-xl font-bold mb-1 text-red-600">🔴 NO FOLLOW-UP</h3>
-                    <p class="text-gray-600 text-sm">Promising leads go cold and are lost forever.</p>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold text-red-600 mb-2">Hiring Bottlenecks</h3>
+                    <p>Growth means more people, more costs, and more management headaches.</p>
                 </div>
             </div>
+            <p class="mt-10 text-center text-xl font-semibold text-gray-800">What if you could eliminate these bottlenecks, onboard clients faster, and scale your agency's output without burnout?</p>
         </div>
     </section>
 
-    <section id="solutions" class="py-16 md:py-20 bg-white">
+    <section id="solution" class="py-16 md:py-20 bg-white">
         <div class="container mx-auto px-6">
-            <h2 class="section-title-light text-3xl md:text-4xl text-center mb-4 uppercase">OUR <span class="highlight-accent-light">AUTOMATED GROWTH SYSTEM</span></h2>
-            <p class="text-center text-gray-600 mb-10 md:mb-14 max-w-2xl mx-auto text-lg">We don't just sell services. We build you a complete, automated system with 5 core engines:</p>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-4xl mx-auto">
-                <div class="bg-gray-50 p-6 rounded-xl shadow-lg feature-card-light">
-                    <h3 class="text-xl font-bold mb-2">1. Lead Generation</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">We find and verify thousands of your ideal clients, creating a targeted list ready for outreach.</p>
+            <div class="text-center">
+                <h2 class="section-title-light text-3xl md:text-4xl text-gray-900 uppercase">Introducing <span class="highlight-accent-light">The AI Agency Accelerator</span></h2>
+                <h3 class="mt-2 text-2xl font-semibold">Your Secret Weapon for Explosive Growth</h3>
+                <p class="mt-4 max-w-3xl mx-auto text-lg text-gray-600">I've built a lean, powerful AI infrastructure designed specifically for ambitious marketing agencies like yours. This isn't a temporary fix; it's a permanent upgrade to your operational DNA, enabling you to:</p>
+            </div>
+            <div class="mt-12 space-y-8 max-w-3xl mx-auto">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center">
+                        <svg class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                    <div class="ml-4">
+                        <h4 class="text-xl font-bold">Auto-Generate Hyper-Personalized Client Audits</h4>
+                        <p class="mt-1 text-gray-600"><span class="font-semibold">How:</span> Our AI instantly analyzes prospect websites, ad accounts, and market landscapes. <span class="font-semibold text-blue-600">(Perfect for agencies focused on Google Ad Grants!)</span><br><span class="font-semibold">Benefit:</span> Deliver deep, impressive insights in minutes, not hours. Provide instant value, making your agency the obvious choice.</p>
+                    </div>
                 </div>
-                <div class="bg-gray-50 p-6 rounded-xl shadow-lg feature-card-light">
-                    <h3 class="text-xl font-bold mb-2">2. Deep Personalization</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">AI crafts unique hooks for every prospect, making your cold emails feel like 1-to-1 conversations.</p>
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center">
+                        <svg class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8l2-2m0 0l2 2m-2-2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v0z"></path></svg>
+                    </div>
+                    <div class="ml-4">
+                        <h4 class="text-xl font-bold">Automate Intelligent Lead Follow-Up (WhatsApp & Email)</h4>
+                        <p class="mt-1 text-gray-600"><span class="font-semibold">How:</span> The system crafts and sends tailored follow-up messages based on lead engagement, nurturing prospects without human intervention.<br><span class="font-semibold">Benefit:</span> Boost conversion rates, reduce sales cycle time, and ensure no hot lead ever falls through the cracks again.</p>
+                    </div>
                 </div>
-                <div class="bg-gray-50 p-6 rounded-xl shadow-lg feature-card-light">
-                    <h3 class="text-xl font-bold mb-2">3. Email Follow-Up System</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">A relentless, automated follow-up sequence that converts interested leads into booked meetings.</p>
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center">
+                         <svg class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    </div>
+                    <div class="ml-4">
+                        <h4 class="text-xl font-bold">Create Flawless Monthly Reports in Minutes</h4>
+                        <p class="mt-1 text-gray-600"><span class="font-semibold">How:</span> Connect your data sources, and our AI compiles comprehensive, branded client reports automatically.<br><span class="font-semibold">Benefit:</span> Reclaim days spent on manual reporting, enhance client satisfaction, and refocus your team on strategy.</p>
+                    </div>
                 </div>
-                <div class="bg-gray-50 p-6 rounded-xl shadow-lg feature-card-light lg:col-span-1">
-                    <h3 class="text-xl font-bold mb-2">4. Client Onboarding</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">Automate welcome emails, contracts, and initial data collection for a seamless client experience.</p>
-                </div>
-                <div class="bg-gray-50 p-6 rounded-xl shadow-lg feature-card-light lg:col-span-2">
-                    <h3 class="text-xl font-bold mb-2">5. Sales Pipeline & Follow-Up</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">The entire process is managed in a central system, ensuring no lead is ever missed and follow-ups are perfectly timed.</p>
+                 <div class="flex items-start">
+                    <div class="flex-shrink-0 h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center">
+                        <svg class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </div>
+                    <div class="ml-4">
+                        <h4 class="text-xl font-bold">Streamline Client Onboarding (Bonus)</h4>
+                        <p class="mt-1 text-gray-600"><span class="font-semibold">How:</span> Automate welcome emails, contract sending, and initial data collection workflows.<br><span class="font-semibold">Benefit:</span> Deliver a seamless, professional client experience from day one, setting the stage for long-term partnerships.</p>
+                    </div>
                 </div>
             </div>
+            <p class="mt-12 text-center text-xl font-semibold text-gray-800">"This system isn't just about saving time; it's about giving you a scalable, predictable way to acquire and retain clients, ensuring your agency's continued dominance."</p>
         </div>
     </section>
-    
-    <!-- Loom Demo Section -->
-    <section id="demo" class="py-16 bg-gray-100">
+
+    <section id="advantage" class="py-16 md:py-20 bg-gray-100 border-y border-gray-200">
         <div class="container mx-auto px-6 text-center">
-            <h2 class="section-title-light text-3xl md:text-4xl text-center mb-4 uppercase">SEE THE SYSTEM IN ACTION</h2>
-            <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">Words are one thing. Seeing this machine work is another. Watch this 2-minute demo to see exactly how we generate leads on autopilot.</p>
-            <a href="https://www.loom.com/share/placeholder" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-md text-lg cta-button-light loom-button uppercase">
-                <span>▶ Watch The 2-Min Demo</span>
-            </a>
-        </div>
-    </section>
-
-    <section id="guarantees" class="py-16 md:py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <h2 class="section-title-light text-3xl md:text-4xl text-center mb-10 uppercase">OUR <span class="highlight-accent-light">“CAN’T LOSE”</span> PROPOSITION:</h2>
-            <div class="space-y-4 max-w-2xl mx-auto">
-                <div class="bg-gray-50 p-4 rounded-lg shadow-md guarantee-box-light">
-                    <h3 class="text-lg font-bold text-blue-600">GUARANTEE: 15+ Qualified Appointments In 90 Days</h3>
-                    <p class="text-gray-600 text-xs sm:text-sm">If we don't book at least 15 qualified sales calls with your ideal clients in your calendar within 90 days, we work for free until we do. Simple.</p>
+            <h2 class="section-title-light text-3xl md:text-4xl text-gray-900 uppercase">The <span class="highlight-accent-light">"Why Not Us?"</span> Factor</h2>
+            <h3 class="mt-2 text-2xl font-semibold">Your Agency's Perpetual Growth Engine</h3>
+            <p class="mt-4 max-w-3xl mx-auto text-lg text-gray-600">Unlike traditional services that charge per lead or per close, we believe in empowering your agency. This isn't a recurring service; it's a branded AI infrastructure installed directly into your operations.</p>
+            <div class="mt-10 grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h4 class="text-xl font-bold mb-2">Own Your Growth</h4>
+                    <p>Once deployed, this system is yours – no ongoing fees, no per-lead costs, ever. You own the engine of your success.</p>
                 </div>
-                <div class="bg-gray-50 p-4 rounded-lg shadow-md guarantee-box-light">
-                    <h3 class="text-lg font-bold text-blue-600">BONUS #1: Your Own Automated CRM & Pipeline</h3>
-                    <p class="text-gray-600 text-xs sm:text-sm">We'll set up your entire sales pipeline in an automated system that you own forever. (£2,000 Value)</p>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h4 class="text-xl font-bold mb-2">Rapid ROI</h4>
+                    <p>Most agencies cover the entire setup cost by closing just ONE new client using the system, typically within the first 1-2 weeks.</p>
                 </div>
-                <div class="bg-gray-50 p-4 rounded-lg shadow-md guarantee-box-light">
-                    <h3 class="text-lg font-bold text-blue-600">BONUS #2: AI Sales Training & Playbooks</h3>
-                    <p class="text-gray-600 text-xs sm:text-sm">We'll train you and your team on how to leverage AI for sales, including prompts and strategies we use daily. (£1,500 Value)</p>
-                </div>
-                <div class="bg-gray-50 p-4 rounded-lg shadow-md guarantee-box-light">
-                    <h3 class="text-lg font-bold text-blue-600">BONUS #3: AI-Powered CV Scoring System</h3>
-                    <p class="text-gray-600 text-xs sm:text-sm">If you're in recruitment, we'll build you an AI to automatically score incoming CVs against your job specs, saving you hours. (£1,000 Value)</p>
-                </div>
-                 <div class="bg-gray-50 p-4 rounded-lg shadow-md guarantee-box-light">
-                    <h3 class="text-lg font-bold text-blue-600">BONUS #4: Automated CV Extractor</h3>
-                    <p class="text-gray-600 text-xs sm:text-sm">A system that automatically pulls candidate CVs from your email inbox and adds them to your talent pool. No more manual downloads. (£750 Value)</p>
-                </div>
-                 <div class="bg-gray-50 p-4 rounded-lg shadow-md guarantee-box-light">
-                    <h3 class="text-lg font-bold text-blue-600">BONUS #5: 24/7 AI Website Chatbot</h3>
-                    <p class="text-gray-600 text-xs sm:text-sm">An intelligent chatbot for your website to answer candidate & client FAQs 24/7, capture leads, and book calls. (£750 Value)</p>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h4 class="text-xl font-bold mb-2">Built on Proven Tech</h4>
+                    <p>Leveraging robust platforms like n8n and advanced AI, our system is designed for reliability, scalability, and future-proofing.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="proof" class="py-16 md:py-20 bg-gray-100">
+    <section id="proof" class="py-16 md:py-20 bg-white">
         <div class="container mx-auto px-6">
-            <h2 class="section-title-light text-3xl md:text-4xl text-center mb-10 uppercase">RESULTS FROM CLIENTS LIKE YOU:</h2>
-            <div class="grid md:grid-cols-3 gap-6 md:gap-8">
-                <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                    <img src="https://placehold.co/60x60/3b82f6/FFFFFF?text=MA" alt="Marketing Agency Founder" class="testimonial-img mx-auto mb-3">
-                    <p class="text-gray-600 italic text-sm mb-1">"We went from a handful of leads a month to <span class="font-bold text-gray-900">22 booked appointments in the first month</span>. This system is the real deal."</p>
-                    <p class="text-blue-600 font-semibold text-xs">- M.A., Founder, Growth Agency</p>
+            <h2 class="section-title-light text-3xl md:text-4xl text-center mb-10 uppercase">Don't Just Take Our Word For It</h2>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center border border-gray-200">
+                    <img src="https://placehold.co/80x80/3b82f6/FFFFFF?text=JD" alt="Jane Doe" class="testimonial-img mx-auto mb-4">
+                    <p class="text-gray-600 italic text-md mb-2">"Before Roger's AI system, we were drowning in manual audits and follow-ups. Now, we've cut our sales cycle in half and can onboard clients faster than ever. It's like having an entire sales and reporting team working 24/7."</p>
+                    <p class="text-blue-600 font-semibold">- Jane Doe, Founder & CEO, ScaleUp Agency</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                    <img src="https://placehold.co/60x60/3b82f6/FFFFFF?text=SB" alt="SaaS Business Owner" class="testimonial-img mx-auto mb-3">
-                    <p class="text-gray-600 italic text-sm mb-1">"The automated follow-ups are a game-changer. We've <span class="font-bold text-gray-900">revived 3 major deals</span> we thought were lost. Incredible ROI."</p>
-                    <p class="text-blue-600 font-semibold text-xs">- S.B., CEO, B2B SaaS</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                    <img src="https://placehold.co/60x60/3b82f6/FFFFFF?text=TJ" alt="Business Consultant" class="testimonial-img mx-auto mb-3">
-                    <p class="text-gray-600 italic text-sm mb-1">"I used to spend 15-20 hours a week prospecting. Now I spend almost zero. I just show up to the sales calls. <span class="font-bold text-gray-900">Truly life-changing</span>."</p>
-                    <p class="text-blue-600 font-semibold text-xs">- T.J., Business Consultant</p>
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center border border-gray-200">
+                    <img src="https://placehold.co/80x80/3b82f6/FFFFFF?text=MS" alt="Mark Smith" class="testimonial-img mx-auto mb-4">
+                    <p class="text-gray-600 italic text-md mb-2">"The efficiency gains are insane. We saved over 40 hours last month on reporting alone, allowing us to focus purely on client strategy. This is a game-changer for agency profitability."</p>
+                    <p class="text-blue-600 font-semibold">- Mark Smith, Head of Operations, Digital Impact</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-16 md:py-20 bg-gray-100 border-y border-gray-200">
+        <div class="container mx-auto px-6 text-center">
+            <img src="https://placehold.co/128x128/9ca3af/FFFFFF?text=RM" alt="Roger Malek" class="about-img mx-auto mb-6">
+            <h2 class="section-title-light text-3xl md:text-4xl text-gray-900">Your Growth is My Passion.</h2>
+            <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">
+                Hi, I'm Roger Malek. For years, I've dedicated myself to mastering AI and workflow automation, building complex solutions on platforms like n8n. My passion isn't just about technology; it's about solving real-world business problems and empowering agencies like yours to thrive. I pour 6 hours daily into refining these systems, ensuring you get cutting-edge, practical tools that deliver measurable results and help you achieve your ambitious goals.
+            </p>
         </div>
     </section>
 
     <section id="contact" class="py-16 md:py-24 bg-blue-600 text-white">
         <div class="container mx-auto px-6 text-center">
-            <h2 class="section-title-hormozi text-3xl md:text-4xl mb-4 uppercase text-black">STOP GUESSING. START GROWING.</h2>
-            <p class="text-lg text-blue-100 mb-8 max-w-xl mx-auto">You've seen the offer, the guarantee, and the proof. Book your FREE "Automated Growth" Strategy Call. We'll map out your lead generation plan. No-obligation.</p>
-            <p class="text-xl font-bold mb-1">ON YOUR FREE STRATEGY CALL:</p>
-            <ul class="text-blue-50 list-none inline-block text-left mb-8 text-sm space-y-1">
-                <li><span class="text-white font-bold mr-1">✓</span> We'll build your custom AI Lead Generation Roadmap.</li>
-                <li><span class="text-white font-bold mr-1">✓</span> We'll identify your #1 growth bottleneck.</li>
-                <li><span class="text-white font-bold mr-1">✓</span> You'll get a clear ROI projection. No fluff.</li>
-            </ul>
+            <h2 class="section-title-hormozi text-3xl md:text-4xl mb-4 uppercase text-black">Ready to Revolutionize Your Agency's Operations?</h2>
+            <p class="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">The agencies winning big aren't working harder; they're working smarter. This is your chance to gain an unparalleled competitive edge. Stop leaving money on the table and free up your team to do what they do best: deliver amazing results for your clients.</p>
+            <p class="text-xl font-bold mb-2">Take the first step. It's a quick, no-pressure chat. Let's explore how the AI Agency Accelerator can specifically transform your agency's workflow and profitability.</p>
             <div>
-                <a href="https://calendly.com/rogermalek1987" target="_blank" rel="noopener noreferrer" class="bg-gray-900 hover:bg-black text-white font-bold py-4 px-10 md:px-12 rounded-md text-xl md:text-2xl cta-button-light shadow-2xl uppercase">
-                    <span>CLAIM MY FREE GROWTH CALL!</span>
-                    <svg class="w-6 h-6 arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                <a href="https://calendly.com/rogermalek1987" target="_blank" rel="noopener noreferrer" class="bg-gray-900 hover:bg-black text-white font-bold py-4 px-10 md:px-12 rounded-md text-xl md:text-2xl cta-button-light shadow-2xl uppercase mt-6">
+                    <span>🚀 Book Your Free 15-Minute Strategy Call Now 🚀</span>
                 </a>
             </div>
-            <p class="mt-6 text-xs text-blue-200">(Spots are limited to ensure client success. Act now.)</p>
         </div>
     </section>
     
@@ -270,7 +278,7 @@
                 Move<span class="text-blue-500">4</span>Freedom
             </a>
             <p class="mt-3 text-sm">&copy; <span id="currentYear"></span> Move 4 Freedom. All rights reserved.</p>
-            <p class="text-xs mt-1.5">Stop Trading Time For Money. Automate Your Business Growth.</p>
+            <p class="text-xs mt-1.5">Stop Trading Time For Money. Automate Your Agency's Growth.</p>
         </div>
     </footer>
 
