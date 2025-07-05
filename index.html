@@ -34,6 +34,9 @@
     </script>
 
     <style>
+        html {
+            scroll-padding-top: 75px; /* Prevents fixed nav from overlapping content on anchor links */
+        }
         body {
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
@@ -181,7 +184,7 @@
                     </div>
                 </form>
                 <div id="form-success" class="mt-4 p-3 text-sm text-green-700 bg-green-100 rounded-md hidden">
-                    Thank you! Your audit is on its way. We'll be in touch shortly.
+                    Thank you! Your audit is being generated. We'll be in touch shortly.
                 </div>
                 <div id="form-error" class="mt-4 p-3 text-sm text-red-700 bg-red-100 rounded-md hidden">
                     Oops! Something went wrong. Please try again.
@@ -390,7 +393,7 @@
                 successMsg.classList.add('hidden');
                 errorMsg.classList.add('hidden');
 
-                const webhookUrl = 'https://primary-production-58a3.up.railway.app/webhook-test/f1a5ba0c-d538-4975-8b66-2f787e076dc8';
+                const webhookUrl = 'https://primary-production-58a3.up.railway.app/webhook/f1a5ba0c-d538-4975-8b66-2f787e076dc8';
                 const formData = new FormData(auditForm);
                 const payload = Object.fromEntries(formData.entries());
 
