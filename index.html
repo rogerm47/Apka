@@ -3,427 +3,286 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoofFlow AI - Innovative Roofing Solutions</title>
     
-    <!-- SEO & Page Information -->
-    <title>AI Growth Engine for Marketing Agencies | Move 4 Freedom</title>
-    <meta name="description" content="We build AI-powered growth engines for marketing agencies to double their client base and free up 30+ hours/month. Stop chasing, start closing.">
-    <link rel="canonical" href="https://www.move4freedom.space/">
-
-    <!-- Scripts and Styles -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "AI Growth Engine",
-      "url": "https://www.move4freedom.space/",
-      "logo": "https://placehold.co/200x60/3b82f6/FFFFFF?text=AI+Growth+Engine",
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "Sales",
-        "url": "https://calendly.com/rogermalek1987"
-      },
-      "founder": {
-        "@type": "Person",
-        "name": "Roger Malek"
-      }
-    }
-    </script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
 
     <style>
-        html {
-            scroll-padding-top: 75px; /* Prevents fixed nav from overlapping content on anchor links */
-        }
+        /* Custom styles to apply the Inter font */
         body {
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
-        .cta-button-main {
-            transition: all 0.2s ease-in-out;
-            letter-spacing: 0.5px;
-            display: inline-flex; 
-            align-items: center; 
-            justify-content: center;
-            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+        /* Gradient background for hero section */
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.95) 0%, rgba(31, 41, 55, 0.9) 100%);
         }
-        .cta-button-main:hover {
-            transform: scale(1.05) translateY(-2px); 
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.5); 
+        /* Subtle animation for cards */
+        .service-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
-        .feature-card-light {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #e5e7eb; /* gray-200 */
-        }
-        .feature-card-light:hover {
+        .service-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.2);
-        }
-        .section-title-light {
-            font-weight: 900; 
-            letter-spacing: -0.5px;
-        }
-        .highlight-accent-light {
-            color: #3b82f6; /* Tailwind Blue-500 */
-        }
-        #mobile-menu {
-            max-height: 0;
-            opacity: 0;
-            transform: translateY(-10px);
-            overflow: hidden;
-            transition: max-height 0.4s ease-out, opacity 0.3s ease-out, transform 0.3s ease-out;
-            visibility: hidden;
-        }
-        #mobile-menu.menu-open {
-            max-height: 500px;
-            opacity: 1;
-            transform: translateY(0);
-            visibility: visible;
-        }
-        .testimonial-img {
-            width: 72px;
-            height: 72px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #3b82f6;
-        }
-        .about-img {
-            width: 128px;
-            height: 128px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #3b82f6;
-        }
-        /* Styles for the new audit form */
-        .audit-form input[type="text"],
-        .audit-form input[type="email"] {
-            border: 2px solid #d1d5db; /* gray-300 */
-            transition: border-color 0.2s ease-in-out;
-        }
-        .audit-form input[type="text"]:focus,
-        .audit-form input[type="email"]:focus {
-            border-color: #3b82f6; /* blue-500 */
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
-        }
-        .loader-light {
-            border: 3px solid #f3f3f3; /* Light grey */
-            border-top: 3px solid #3b82f6; /* Blue */
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
         }
     </style>
-    <!-- Google Analytics or other tracking scripts can be placed here -->
 </head>
-<body class="bg-white text-gray-900">
+<body class="bg-gray-50 text-gray-800">
 
-    <nav class="bg-white/80 backdrop-blur-md shadow-md fixed w-full z-50 top-0">
-        <div class="container mx-auto px-6 py-3.5 flex justify-between items-center">
-            <a href="#" class="text-2xl md:text-3xl font-black text-gray-900 tracking-tight">
-                <span class="text-blue-500">AI</span> Growth Engine
-            </a>
-            <div class="hidden md:flex space-x-4 items-center">
-                <a href="#problem" class="text-gray-600 hover:text-blue-600 transition-colors px-2 py-1 text-sm font-medium">The Problem</a>
-                <a href="#solution" class="text-gray-600 hover:text-blue-600 transition-colors px-2 py-1 text-sm font-medium">The Solution</a>
-                <a href="#proof" class="text-gray-600 hover:text-blue-600 transition-colors px-2 py-1 text-sm font-medium">Proof</a>
-                <a href="#about" class="text-gray-600 hover:text-blue-600 transition-colors px-2 py-1 text-sm font-medium">About Me</a>
-                <a href="https://calendly.com/rogermalek1987" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-5 rounded-md cta-button-light text-sm">BOOK A CALL</a>
-            </div>
-            <div class="md:hidden">
-                <button id="mobile-menu-button" class="text-gray-600 hover:text-gray-900 focus:outline-none" aria-label="Open mobile menu" aria-expanded="false">
-                    <svg class="w-7 h-7 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+    <!-- === Header === -->
+    <header class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <a href="#" class="text-2xl font-bold text-gray-900">
+                    Roof<span class="text-blue-600">Flow</span> AI
+                </a>
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#services" class="text-gray-600 hover:text-blue-600 transition duration-300">Services</a>
+                    <a href="#about" class="text-gray-600 hover:text-blue-600 transition duration-300">About Us</a>
+                    <a href="#process" class="text-gray-600 hover:text-blue-600 transition duration-300">How It Works</a>
+                    <a href="#contact" class="text-gray-600 hover:text-blue-600 transition duration-300">Contact</a>
+                </nav>
+                <!-- CTA Button -->
+                <a href="#contact" class="hidden md:inline-block bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-700 transition duration-300 shadow-md">
+                    Free Quote
+                </a>
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-800 focus:outline-none">
+                    <i data-feather="menu" class="w-6 h-6"></i>
                 </button>
             </div>
         </div>
-        <div id="mobile-menu" class="md:hidden bg-white border-t border-gray-200">
-            <a href="#problem" class="block py-3 px-6 text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-colors font-medium">The Problem</a>
-            <a href="#solution" class="block py-3 px-6 text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-colors font-medium">The Solution</a>
-            <a href="#proof" class="block py-3 px-6 text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-colors font-medium">Proof</a>
-            <a href="#about" class="block py-3 px-6 text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-colors font-medium">About Me</a>
-            <a href="https://calendly.com/rogermalek1987" target="_blank" rel="noopener noreferrer" class="block py-3.5 px-6 text-white bg-blue-600 hover:bg-blue-700 text-center rounded-b-lg font-bold">BOOK A CALL</a>
-        </div>
-    </nav>
-
-    <header id="offer" class="pt-36 pb-24 md:pt-48 md:pb-36 bg-white">
-        <div class="container mx-auto px-6 text-center">
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-black mb-4 leading-tight uppercase">
-                <span class="block">Stop Chasing & Start Closing:</span>
-                <span class="block highlight-accent-light">Your AI-Powered Growth Engine for Marketing Agencies</span>
-            </h1>
-            <p class="text-md sm:text-lg md:text-xl text-gray-600 mb-10 max-w-3xl mx-auto">
-                Transform leads into loyal clients, free up <span class="font-bold">30+ hours/month</span>, and scale your agency without adding headcount. This isn't just automation; it's unfair advantage.
-            </p>
-            
-            <!-- Updated Audit Form -->
-            <div class="mt-8 max-w-xl mx-auto">
-                <p class="font-semibold text-lg mb-4">Get Your FREE, Instant AI-Powered Website Audit 👇</p>
-                <form id="auditForm" class="audit-form space-y-3">
-                    <div>
-                        <label for="landingUrl" class="sr-only">Website URL for Audit:</label>
-                        <input type="text" id="landingUrl" name="landingUrl" placeholder="Enter your website URL..." class="w-full px-4 py-3 rounded-md text-lg" required>
-                    </div>
-                    <div>
-                         <label for="email" class="sr-only">Email to Receive Audit:</label>
-                        <input type="email" id="email" name="email" placeholder="Enter your email to receive the audit..." required class="w-full px-4 py-3 rounded-md text-lg">
-                    </div>
-                    <div>
-                        <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-3 px-6 rounded-md text-lg cta-button-main shadow-lg uppercase cursor-pointer whitespace-nowrap flex items-center justify-center">
-                            <span class="btn-text">Get My Free Audit</span>
-                            <div class="loader-light hidden ml-3"></div>
-                        </button>
-                    </div>
-                </form>
-                <div id="form-success" class="mt-4 p-3 text-sm text-green-700 bg-green-100 rounded-md hidden">
-                    Thank you! Your audit is being generated. We'll be in touch shortly.
-                </div>
-                <div id="form-error" class="mt-4 p-3 text-sm text-red-700 bg-red-100 rounded-md hidden">
-                    Oops! Something went wrong. Please try again.
-                </div>
-            </div>
-
-            <p class="mt-4 text-sm text-gray-500">(No-obligation. See how AI can transform your agency.)</p>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#services" class="block py-2 text-gray-600 hover:text-blue-600">Services</a>
+            <a href="#about" class="block py-2 text-gray-600 hover:text-blue-600">About Us</a>
+            <a href="#process" class="block py-2 text-gray-600 hover:text-blue-600">How It Works</a>
+            <a href="#contact" class="block py-2 text-gray-600 hover:text-blue-600">Contact</a>
+            <a href="#contact" class="block mt-4 w-full text-center bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
+                Free Quote
+            </a>
         </div>
     </header>
 
     <main>
-        <section id="problem" class="py-16 md:py-20 bg-gray-100 border-y border-gray-200">
-            <div class="container mx-auto px-6">
-                <div class="text-center">
-                    <h2 class="section-title-light text-3xl md:text-4xl text-gray-900">Are You Still Trading Time for Clients?</h2>
-                    <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">You're a brilliant marketing agency, driving results for your clients. But let's be honest, growth isn't always glamorous. You're probably battling:</p>
-                </div>
-                <div class="mt-12 grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h3 class="text-xl font-bold text-red-600 mb-2">Endless Hours on Manual Audits</h3>
-                        <p>Crafting custom pitches takes forever, slowing down your sales cycle.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h3 class="text-xl font-bold text-red-600 mb-2">Leads Slipping Through the Cracks</h3>
-                        <p>Following up consistently feels like a full-time job, and missed opportunities cost you big.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h3 class="text-xl font-bold text-red-600 mb-2">Report Generation Headaches</h3>
-                        <p>Spending days compiling monthly reports instead of focusing on client strategy.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h3 class="text-xl font-bold text-red-600 mb-2">Hiring Bottlenecks</h3>
-                        <p>Growth means more people, more costs, and more management headaches.</p>
-                    </div>
-                </div>
-                <p class="mt-10 text-center text-xl font-semibold text-gray-800">What if you could eliminate these bottlenecks, onboard clients faster, and scale your agency's output without burnout?</p>
+        <!-- === Hero Section === -->
+        <section class="relative pt-32 pb-20 md:pt-48 md:pb-32 text-white">
+            <!-- Background Image -->
+            <div class="absolute inset-0">
+                <img src="https://placehold.co/1920x1080/111827/FFFFFF?text=Modern+Roof" 
+                     onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/111827/FFFFFF?text=Image+Error';"
+                     alt="Modern house roof" class="w-full h-full object-cover">
+                <div class="absolute inset-0 hero-gradient"></div>
             </div>
-        </section>
-
-        <section id="solution" class="py-16 md:py-20 bg-white">
-            <div class="container mx-auto px-6">
-                <div class="text-center">
-                    <h2 class="section-title-light text-3xl md:text-4xl text-gray-900 uppercase">Introducing <span class="highlight-accent-light">The AI Agency Accelerator</span></h2>
-                    <h3 class="mt-2 text-2xl font-semibold">Your Secret Weapon for Explosive Growth</h3>
-                    <p class="mt-4 max-w-3xl mx-auto text-lg text-gray-600">I've built a lean, powerful AI infrastructure designed specifically for ambitious marketing agencies like yours. This isn't a temporary fix; it's a permanent upgrade to your operational DNA, enabling you to:</p>
-                </div>
-                <div class="mt-12 space-y-8 max-w-3xl mx-auto">
-                    <div class="flex items-start">
-                        <div class="flex-shrink-0 h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center">
-                            <svg class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                        </div>
-                        <div class="ml-4">
-                            <h4 class="text-xl font-bold">Auto-Generate Hyper-Personalized Client Audits</h4>
-                            <p class="mt-1 text-gray-600"><span class="font-semibold">How:</span> Our AI instantly analyzes prospect websites, ad accounts, and market landscapes. <span class="font-semibold text-blue-600">(Perfect for agencies focused on Google Ad Grants!)</span><br><span class="font-semibold">Benefit:</span> Deliver deep, impressive insights in minutes, not hours. Provide instant value, making your agency the obvious choice.</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start">
-                        <div class="flex-shrink-0 h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center">
-                            <svg class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8l2-2m0 0l2 2m-2-2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v0z"></path></svg>
-                        </div>
-                        <div class="ml-4">
-                            <h4 class="text-xl font-bold">Automate Intelligent Lead Follow-Up (WhatsApp & Email)</h4>
-                            <p class="mt-1 text-gray-600"><span class="font-semibold">How:</span> The system crafts and sends tailored follow-up messages based on lead engagement, nurturing prospects without human intervention.<br><span class="font-semibold">Benefit:</span> Boost conversion rates, reduce sales cycle time, and ensure no hot lead ever falls through the cracks again.</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start">
-                        <div class="flex-shrink-0 h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center">
-                             <svg class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                        </div>
-                        <div class="ml-4">
-                            <h4 class="text-xl font-bold">Create Flawless Monthly Reports in Minutes</h4>
-                            <p class="mt-1 text-gray-600"><span class="font-semibold">How:</span> Connect your data sources, and our AI compiles comprehensive, branded client reports automatically.<br><span class="font-semibold">Benefit:</span> Reclaim days spent on manual reporting, enhance client satisfaction, and refocus your team on strategy.</p>
-                        </div>
-                    </div>
-                     <div class="flex items-start">
-                        <div class="flex-shrink-0 h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center">
-                            <svg class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                        </div>
-                        <div class="ml-4">
-                            <h4 class="text-xl font-bold">Streamline Client Onboarding (Bonus)</h4>
-                            <p class="mt-1 text-gray-600"><span class="font-semibold">How:</span> Automate welcome emails, contract sending, and initial data collection workflows.<br><span class="font-semibold">Benefit:</span> Deliver a seamless, professional client experience from day one, setting the stage for long-term partnerships.</p>
-                        </div>
-                    </div>
-                </div>
-                <p class="mt-12 text-center text-xl font-semibold text-gray-800">"This system isn't just about saving time; it's about giving you a scalable, predictable way to acquire and retain clients, ensuring your agency's continued dominance."</p>
-            </div>
-        </section>
-
-        <section id="advantage" class="py-16 md:py-20 bg-gray-100 border-y border-gray-200">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="section-title-light text-3xl md:text-4xl text-gray-900 uppercase">The <span class="highlight-accent-light">"Why Not Us?"</span> Factor</h2>
-                <h3 class="mt-2 text-2xl font-semibold">Your Agency's Perpetual Growth Engine</h3>
-                <p class="mt-4 max-w-3xl mx-auto text-lg text-gray-600">Unlike traditional services that charge per lead or per close, we believe in empowering your agency. This isn't a recurring service; it's a branded AI infrastructure installed directly into your operations.</p>
-                <div class="mt-10 grid md:grid-cols-3 gap-8">
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h4 class="text-xl font-bold mb-2">Own Your Growth</h4>
-                        <p>Once deployed, this system is yours – no ongoing fees, no per-lead costs, ever. You own the engine of your success.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h4 class="text-xl font-bold mb-2">Rapid ROI</h4>
-                        <p>Most agencies cover the entire setup cost by closing just ONE new client using the system, typically within the first 1-2 weeks.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h4 class="text-xl font-bold mb-2">Built on Proven Tech</h4>
-                        <p>Leveraging robust platforms like n8n and advanced AI, our system is designed for reliability, scalability, and future-proofing.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="proof" class="py-16 md:py-20 bg-white">
-            <div class="container mx-auto px-6">
-                <h2 class="section-title-light text-3xl md:text-4xl text-center mb-10 uppercase">Don't Just Take Our Word For It</h2>
-                <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                    <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center border border-gray-200">
-                        <img src="https://placehold.co/80x80/3b82f6/FFFFFF?text=SJ" alt="Testimonial from Sarah Jensen, Founder of ScaleUp Agency" class="testimonial-img mx-auto mb-4" loading="lazy">
-                        <p class="text-gray-600 italic text-md mb-2">"Before Roger's AI system, we were drowning in manual audits and follow-ups. Now, we've cut our sales cycle in half and can onboard clients faster than ever. It's like having an entire sales and reporting team working 24/7."</p>
-                        <p class="text-blue-600 font-semibold">- Sarah J., Founder & CEO, Marketing Agency</p>
-                    </div>
-                    <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center border border-gray-200">
-                        <img src="https://placehold.co/80x80/3b82f6/FFFFFF?text=JK" alt="Testimonial from Jamie Kennsington, Head of Operations at Digital Impact" class="testimonial-img mx-auto mb-4" loading="lazy">
-                        <p class="text-gray-600 italic text-md mb-2">"The efficiency gains are insane. We saved over 40 hours last month on reporting alone, allowing us to focus purely on client strategy. This is a game-changer for agency profitability."</p>
-                        <p class="text-blue-600 font-semibold">- Jamie K., Head of Operations, Digital Marketing Agency Owner</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="about" class="py-16 md:py-20 bg-gray-100 border-y border-gray-200">
-            <div class="container mx-auto px-6 text-center">
-                <img src="https://placehold.co/128x128/9ca3af/FFFFFF?text=RM" alt="Photo of Roger Malek, AI and Automation Expert" class="about-img mx-auto mb-6" loading="lazy">
-                <h2 class="section-title-light text-3xl md:text-4xl text-gray-900">Your Growth is My Passion.</h2>
-                <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">
-                    Hi, I'm Roger Malek. For years, I've dedicated myself to mastering AI and workflow automation, building complex solutions on platforms like n8n. My passion isn't just about technology; it's about solving real-world business problems and empowering agencies like yours to thrive. I pour tons of hours daily into refining these systems, ensuring you get cutting-edge, practical tools that deliver measurable results and help you achieve your ambitious goals.
+            <!-- Content -->
+            <div class="container mx-auto px-6 relative z-10 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4">
+                    Innovative Roofing Solutions Powered by <span class="text-blue-400">Artificial Intelligence</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+                    Precision, durability, and modern technology. We provide the highest quality roofing services using AI analysis.
                 </p>
+                <a href="#contact" class="bg-blue-600 text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-blue-700 transition duration-300 shadow-xl">
+                    Request an Online Quote
+                </a>
             </div>
         </section>
 
-        <section id="contact" class="py-16 md:py-24 bg-blue-600 text-white">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="section-title-hormozi text-3xl md:text-4xl mb-4 uppercase text-black">Ready to Revolutionize Your Agency's Operations?</h2>
-                <p class="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">The agencies winning big aren't working harder; they're working smarter. This is your chance to gain an unparalleled competitive edge. Stop leaving money on the table and free up your team to do what they do best: deliver amazing results for your clients.</p>
-                <p class="text-xl font-bold mb-2">Take the first step. It's a quick, no-pressure chat. Let's explore how the AI Agency Accelerator can specifically transform your agency's workflow and profitability.</p>
-                <div>
-                    <a href="https://calendly.com/rogermalek1987" target="_blank" rel="noopener noreferrer" class="bg-gray-900 hover:bg-black text-white font-bold py-4 px-10 md:px-12 rounded-md text-xl md:text-2xl cta-button-light shadow-2xl uppercase mt-6">
-                        <span>🚀 Book Your Free 15-Minute Strategy Call Now 🚀</span>
+        <!-- === Services Section === -->
+        <section id="services" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Our Services</h2>
+                    <p class="text-lg text-gray-600 mt-2 max-w-2xl mx-auto">We specialize in comprehensive roofing services, combining traditional craftsmanship with the latest technology.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Service Card 1 -->
+                    <div class="service-card bg-gray-50 p-8 rounded-xl shadow-md text-center border border-gray-200">
+                        <div class="bg-blue-100 text-blue-600 rounded-full p-4 w-16 h-16 mx-auto mb-6 flex items-center justify-center">
+                            <i data-feather="tool" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Roof Repairs</h3>
+                        <p class="text-gray-600">Fast and precise AI diagnostics to locate and repair any damage.</p>
+                    </div>
+                    <!-- Service Card 2 -->
+                    <div class="service-card bg-gray-50 p-8 rounded-xl shadow-md text-center border border-gray-200">
+                        <div class="bg-blue-100 text-blue-600 rounded-full p-4 w-16 h-16 mx-auto mb-6 flex items-center justify-center">
+                            <i data-feather="home" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">New Roofs</h3>
+                        <p class="text-gray-600">Designing and building durable, aesthetic roofs from the best materials.</p>
+                    </div>
+                    <!-- Service Card 3 -->
+                    <div class="service-card bg-gray-50 p-8 rounded-xl shadow-md text-center border border-gray-200">
+                        <div class="bg-blue-100 text-blue-600 rounded-full p-4 w-16 h-16 mx-auto mb-6 flex items-center justify-center">
+                            <i data-feather="camera" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Drone Inspections</h3>
+                        <p class="text-gray-600">Detailed analysis of the roof's condition using drones and AI software.</p>
+                    </div>
+                    <!-- Service Card 4 -->
+                    <div class="service-card bg-gray-50 p-8 rounded-xl shadow-md text-center border border-gray-200">
+                        <div class="bg-blue-100 text-blue-600 rounded-full p-4 w-16 h-16 mx-auto mb-6 flex items-center justify-center">
+                            <i data-feather="cpu" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">AI Consultations</h3>
+                        <p class="text-gray-600">Optimizing costs and materials thanks to advanced predictive algorithms.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- === About Us / Why Choose Us Section === -->
+        <section id="about" class="py-20 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-1/2">
+                        <img src="https://placehold.co/600x400/3B82F6/FFFFFF?text=RoofFlow+AI+Team" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/600x400/3B82F6/FFFFFF?text=Image+Error';"
+                             alt="Roofing team at work" class="rounded-xl shadow-2xl w-full">
+                    </div>
+                    <div class="md:w-1/2">
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Why Choose RoofFlow AI?</h2>
+                        <p class="text-lg text-gray-600 mb-6">We are pioneers in the roofing industry, integrating decades of experience with groundbreaking artificial intelligence technology. Our goal is to deliver services with unparalleled precision and efficiency.</p>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1">
+                                    <i data-feather="check" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-lg">Precise AI Diagnostics</h4>
+                                    <p class="text-gray-600">Our algorithms analyze drone data to detect problems invisible to the human eye.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1">
+                                    <i data-feather="shield" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-lg">Quality Guarantee</h4>
+                                    <p class="text-gray-600">We use only proven materials and provide a multi-year warranty on our projects.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1">
+                                    <i data-feather="users" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-lg">Experienced Team</h4>
+                                    <p class="text-gray-600">Our roofers are certified specialists with a passion for their craft.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- === How It Works Section === -->
+        <section id="process" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Our 4-Step Process</h2>
+                    <p class="text-lg text-gray-600 mt-2 max-w-2xl mx-auto">We've simplified the process to ensure your convenience and transparency at every stage.</p>
+                </div>
+                <div class="relative">
+                    <!-- Connecting line -->
+                    <div class="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-gray-200 -translate-y-1/2"></div>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center relative">
+                        <!-- Step 1 -->
+                        <div class="flex flex-col items-center">
+                            <div class="bg-blue-600 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold border-4 border-white shadow-lg z-10">1</div>
+                            <h3 class="text-xl font-bold mt-4 mb-2">Contact & Quote</h3>
+                            <p class="text-gray-600">Contact us via the form or our chatbot to receive an initial quote.</p>
+                        </div>
+                        <!-- Step 2 -->
+                        <div class="flex flex-col items-center">
+                            <div class="bg-blue-600 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold border-4 border-white shadow-lg z-10">2</div>
+                            <h3 class="text-xl font-bold mt-4 mb-2">AI Analysis</h3>
+                            <p class="text-gray-600">We conduct a drone inspection and detailed data analysis to create a precise action plan.</p>
+                        </div>
+                        <!-- Step 3 -->
+                        <div class="flex flex-col items-center">
+                            <div class="bg-blue-600 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold border-4 border-white shadow-lg z-10">3</div>
+                            <h3 class="text-xl font-bold mt-4 mb-2">Execution</h3>
+                            <p class="text-gray-600">Our team of experts efficiently and professionally carries out the planned roofing work.</p>
+                        </div>
+                        <!-- Step 4 -->
+                        <div class="flex flex-col items-center">
+                            <div class="bg-blue-600 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold border-4 border-white shadow-lg z-10">4</div>
+                            <h3 class="text-xl font-bold mt-4 mb-2">Warranty</h3>
+                            <p class="text-gray-600">Enjoy a safe and durable roof with our full satisfaction guarantee.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- === CTA Section === -->
+        <section id="contact" class="bg-gray-800 text-white">
+            <div class="container mx-auto px-6 py-20 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready for the Roof of the Future?</h2>
+                <p class="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
+                    Use our intelligent chatbot to get an instant quote or contact our specialist.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                     <a href="#" class="bg-blue-600 text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-blue-700 transition duration-300 shadow-lg w-full sm:w-auto">
+                        Talk to AI Chatbot
+                    </a>
+                    <a href="mailto:rogermalek1987@gmail.com" class="bg-gray-100 text-gray-800 font-bold px-8 py-4 rounded-lg text-lg hover:bg-gray-200 transition duration-300 shadow-lg w-full sm:w-auto">
+                        Email Us
                     </a>
                 </div>
             </div>
         </section>
     </main>
-    
-    <footer class="bg-white text-gray-500 py-10 border-t">
-        <div class="container mx-auto px-6 text-center">
-            <a href="#" class="text-2xl font-black text-gray-800 hover:text-gray-900 transition-colors">
-                <span class="text-blue-500">AI</span> Growth Engine
-            </a>
-            <p class="mt-3 text-sm">&copy; <span id="currentYear"></span> AI Growth Engine. All rights reserved.</p>
-            <p class="text-xs mt-1.5">Stop Trading Time For Money. Automate Your Agency's Growth.</p>
+
+    <!-- === Footer === -->
+    <footer class="bg-gray-900 text-gray-400">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-center md:text-left mb-4 md:mb-0">
+                    <a href="#" class="text-xl font-bold text-white">
+                        Roof<span class="text-blue-500">Flow</span> AI
+                    </a>
+                    <p class="mt-2 text-sm">© 2024 RoofFlow AI. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://www.linkedin.com/company/roofflowai/" target="_blank" rel="noopener noreferrer" class="hover:text-white"><i data-feather="linkedin" class="w-6 h-6"></i></a>
+                </div>
+            </div>
         </div>
     </footer>
 
     <script>
-        // --- Standard Page Logic (Menu, Scroll, Year) ---
+        // Feather Icons Initialization
+        feather.replace();
+
+        // Mobile Menu Toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
-        if (mobileMenuButton && mobileMenu) {
-            mobileMenuButton.addEventListener('click', () => {
-                const isMenuOpen = mobileMenu.classList.toggle('menu-open');
-                mobileMenuButton.setAttribute('aria-expanded', isMenuOpen);
-            });
-        }
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-                if (mobileMenu && mobileMenu.classList.contains('menu-open')) {
-                    mobileMenu.classList.remove('menu-open');
-                    mobileMenuButton.setAttribute('aria-expanded', 'false');
-                }
-            });
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
         });
-        const currentYearElement = document.getElementById('currentYear');
-        if (currentYearElement) {
-            currentYearElement.textContent = new Date().getFullYear();
-        }
-
-        // --- Audit Form Webhook Submission ---
-        const auditForm = document.getElementById('auditForm');
-        if (auditForm) {
-            auditForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const submitBtn = document.getElementById('submitBtn');
-                const btnText = submitBtn.querySelector('.btn-text');
-                const loader = submitBtn.querySelector('.loader-light');
-                const successMsg = document.getElementById('form-success');
-                const errorMsg = document.getElementById('form-error');
-
-                // Show loader
-                if(loader) loader.classList.remove('hidden');
-                if(btnText) btnText.classList.add('hidden');
-                submitBtn.disabled = true;
-                successMsg.classList.add('hidden');
-                errorMsg.classList.add('hidden');
-
-                const webhookUrl = 'https://primary-production-58a3.up.railway.app/webhook/f1a5ba0c-d538-4975-8b66-2f787e076dc8';
-                const formData = new FormData(auditForm);
-                const payload = Object.fromEntries(formData.entries());
-
-                try {
-                    const response = await fetch(webhookUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(payload),
-                    });
-
-                    if (response.ok) {
-                        successMsg.classList.remove('hidden');
-                        auditForm.reset();
-                    } else {
-                        throw new Error('Network response was not ok.');
-                    }
-                } catch (error) {
-                    console.error('Form submission error:', error);
-                    errorMsg.classList.remove('hidden');
-                } finally {
-                    // Hide loader
-                    if(loader) loader.classList.add('hidden');
-                    if(btnText) btnText.classList.remove('hidden');
-                    submitBtn.disabled = false;
-                }
+        
+        // Close mobile menu when a link is clicked
+        const mobileMenuLinks = mobileMenu.getElementsByTagName('a');
+        for (let i = 0; i < mobileMenuLinks.length; i++) {
+            mobileMenuLinks[i].addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
             });
         }
     </script>
-
 </body>
 </html>
